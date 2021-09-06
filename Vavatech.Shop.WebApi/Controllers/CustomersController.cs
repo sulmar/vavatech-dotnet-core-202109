@@ -10,7 +10,7 @@ using Vavatech.Shop.Models.SearchCritierias;
 namespace Vavatech.Shop.WebApi.Controllers
 {
     [Route("api/[controller]")]    // <- prefix
-    [Route("api/klienci")]    // <- prefix
+    // [Route("api/klienci")]    // <- prefix
     public class CustomersController : ControllerBase
     {
         private readonly ICustomerService customerService;
@@ -30,7 +30,7 @@ namespace Vavatech.Shop.WebApi.Controllers
         //}
 
         // GET api/customers/{id} - endpoint (adres końcowy)
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetCustomerById")]
         public IActionResult Get(int id)
         {
             var customer = customerService.Get(id);
@@ -75,6 +75,51 @@ namespace Vavatech.Shop.WebApi.Controllers
             var customers = customerService.Get(searchCriteria);
 
             return Ok(customers);
+        }
+
+        // POST api/customers
+        [HttpPost]
+        public IActionResult Post([FromBody] Customer customer)
+        {
+            customerService.Add(customer);
+
+            // return Created($"http://localhost:5000/api/customers/{customer.Id}", customer);
+
+            return CreatedAtRoute("GetCustomerById", new { id = customer.Id }, customer);
+        }
+
+        // PUT api/customers/{id}
+        
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] Customer customer)
+        {
+            if (id != customer.Id)
+                return BadRequest();
+
+            Customer existingCustomer = customerService.Get(id);
+
+            if (existingCustomer == null)
+                return NotFound();
+
+            customerService.Update(customer);
+
+            return Ok(customer);
+        }
+
+        // PATCH 
+
+        // DELETE api/customers/{id}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Customer existingCustomer = customerService.Get(id);
+
+            if (existingCustomer == null)
+                return NotFound();
+
+            customerService.Remove(id);
+
+            return Ok();
         }
 
 

@@ -10,7 +10,7 @@ namespace Vavatech.Shop.FakeServices
 {
     public class FakeCustomerService : ICustomerService
     {
-        private readonly IEnumerable<Customer> customers;
+        private readonly ICollection<Customer> customers;
 
         public FakeCustomerService(Faker<Customer> faker)
         {
@@ -19,7 +19,10 @@ namespace Vavatech.Shop.FakeServices
 
         public void Add(Customer customer)
         {
-            throw new NotImplementedException();
+            var id = customers.Max(c => c.Id);
+            customer.Id = ++id;
+
+            customers.Add(customer);
         }
 
         public IEnumerable<Customer> Get()
