@@ -42,7 +42,7 @@ namespace Vavatech.Shop.WebApi.Controllers
 
         // GET api/customers/{pesel}
 
-        [HttpGet("{pesel:length(11)}")]
+        [HttpGet("{pesel:length(11):pesel}")]
         public IActionResult Get(string pesel)
         {
             var customer = customerService.GetByPesel(pesel);

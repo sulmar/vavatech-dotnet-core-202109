@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +17,7 @@ using Vavatech.Shop.Fakers;
 using Vavatech.Shop.FakeServices;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
+using Vavatech.Shop.WebApi.RouteConstraints;
 
 namespace Vavatech.Shop.WebApi
 {
@@ -33,6 +35,12 @@ namespace Vavatech.Shop.WebApi
         {
             services.AddSingleton<ICustomerService, FakeCustomerService>();
             services.AddSingleton<Faker<Customer>, CustomerFaker>();
+
+            // rejestracja w³asnej regu³y tras
+            services.Configure<RouteOptions>(options =>
+            {
+                options.ConstraintMap.Add("pesel", typeof(PeselRouteConstraint));
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
