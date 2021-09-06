@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,6 +14,16 @@ namespace Vavatech.Shop.WebApi.RouteConstraints
             {
                 string pesel = peselValue.ToString();
 
+                IValidator validator = new PeselValidator();
+
+                try
+                {
+                    return validator.IsValid(pesel);
+                }
+                catch(FormatException)
+                {
+                    return false;
+                }
 
             }
 
