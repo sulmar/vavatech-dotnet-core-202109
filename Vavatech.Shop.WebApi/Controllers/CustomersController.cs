@@ -48,6 +48,11 @@ namespace Vavatech.Shop.WebApi.Controllers
 
         // GET api/customers/{pesel}
 
+        /// <summary>
+        /// Pobierz klienta na podstawie numeru PESEL
+        /// </summary>
+        /// <param name="pesel"></param>
+        /// <returns></returns>
         [HttpGet("{pesel:length(11):pesel}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

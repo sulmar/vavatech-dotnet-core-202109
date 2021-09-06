@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Vavatech.Shop.Fakers;
@@ -35,6 +36,7 @@ namespace Vavatech.Shop.WebApi
         {
             services.AddSingleton<ICustomerService, FakeCustomerService>();
             services.AddSingleton<Faker<Customer>, CustomerFaker>();
+            services.AddSingleton<Faker<Address>, AddressFaker>();
 
             // rejestracja w³asnej regu³y tras
             services.Configure<RouteOptions>(options =>
@@ -50,6 +52,9 @@ namespace Vavatech.Shop.WebApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Vavatech.Shop.WebApi", Version = "v1" });
+
+                var filePath = Path.Combine(AppContext.BaseDirectory, "Vavatech.Shop.WebApi.xml");
+                c.IncludeXmlComments(filePath);
             });
         }
 

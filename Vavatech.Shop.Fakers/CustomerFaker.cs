@@ -9,7 +9,7 @@ namespace Vavatech.Shop.Fakers
     // dotnet add package Sulmar.Bogus.Extensions.Poland
     public class CustomerFaker : Faker<Customer>
     {
-        public CustomerFaker()
+        public CustomerFaker(Faker<Address> addressFaker)
         {
             StrictMode(true);
             RuleFor(p => p.Id, f => f.IndexFaker);
@@ -21,10 +21,20 @@ namespace Vavatech.Shop.Fakers
             RuleFor(p => p.IsRemoved, f => f.Random.Bool(0.2f));
             RuleFor(p => p.Pesel, f => f.Person.Pesel());
 
-            RuleFor(p => p.CreatedOn, f => f.Date.Past(2));
+            RuleFor(p => p.ShipAddress, f => addressFaker.Generate());
 
-            Ignore(p => p.ShipAddress);
+            RuleFor(p => p.CreatedOn, f => f.Date.Past(2));
             
+        }
+    }
+
+    public class AddressFaker : Faker<Address>
+    {
+        public AddressFaker()
+        {
+            RuleFor(p => p.City, f => f.Address.City());
+            RuleFor(p => p.Street, f => f.Address.StreetName());
+            RuleFor(p => p.ZipCode, f => f.Address.ZipCode());
         }
     }
 }

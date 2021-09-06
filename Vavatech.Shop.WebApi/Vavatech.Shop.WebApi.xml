@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Vavatech.Shop.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Vavatech.Shop.WebApi.Controllers.CustomersController.Get(System.String)">
+            <summary>
+            Pobierz klienta na podstawie numeru PESEL
+            </summary>
+            <param name="pesel"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
