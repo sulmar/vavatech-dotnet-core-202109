@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ using Vavatech.Shop.Models.SearchCritierias;
 
 namespace Vavatech.Shop.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]    // <- prefix
     // [Route("api/klienci")]    // <- prefix
     public class CustomersController : ControllerBase
@@ -31,7 +34,9 @@ namespace Vavatech.Shop.WebApi.Controllers
 
         // GET api/customers/{id} - endpoint (adres końcowy)
         [HttpGet("{id:int}", Name = "GetCustomerById")]
-        public IActionResult Get(int id)
+        [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Customer> Get(int id)
         {
             var customer = customerService.Get(id);
 
@@ -44,7 +49,10 @@ namespace Vavatech.Shop.WebApi.Controllers
         // GET api/customers/{pesel}
 
         [HttpGet("{pesel:length(11):pesel}")]
-        public IActionResult Get(string pesel)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public ActionResult<Customer> Get(string pesel)
         {
             var customer = customerService.GetByPesel(pesel);
 
@@ -70,7 +78,7 @@ namespace Vavatech.Shop.WebApi.Controllers
 
         // GET api/customers&city=Warszawa&street=Dworcowa
         [HttpGet]
-        public IActionResult Get([FromQuery] CustomerSearchCriteria searchCriteria)
+        public ActionResult<Customer[]> Get([FromQuery] CustomerSearchCriteria searchCriteria)
         {
             var customers = customerService.Get(searchCriteria);
 
@@ -79,6 +87,8 @@ namespace Vavatech.Shop.WebApi.Controllers
 
         // POST api/customers
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesDefaultResponseType]
         public IActionResult Post([FromBody] Customer customer)
         {
             customerService.Add(customer);
@@ -91,6 +101,10 @@ namespace Vavatech.Shop.WebApi.Controllers
         // PUT api/customers/{id}
         
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public IActionResult Put(int id, [FromBody] Customer customer)
         {
             if (id != customer.Id)
@@ -106,10 +120,33 @@ namespace Vavatech.Shop.WebApi.Controllers
             return Ok(customer);
         }
 
-        // PATCH 
+        // dotnet add package Microsoft.AspNetCore.JsonPatch
+
+        // http://jsonpatch.com
+        // PATCH api/customers/{id}
+        // Content-Type: application/json-patch+json
+        [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public IActionResult Patch(int id, [FromBody] JsonPatchDocument<Customer> patchCustomer)
+        {
+            Customer existingCustomer = customerService.Get(id);
+
+            if (existingCustomer == null)
+                return NotFound();
+
+            patchCustomer.ApplyTo(existingCustomer);
+
+            return NoContent();
+        }
+
 
         // DELETE api/customers/{id}
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public IActionResult Delete(int id)
         {
             Customer existingCustomer = customerService.Get(id);
@@ -118,6 +155,20 @@ namespace Vavatech.Shop.WebApi.Controllers
                 return NotFound();
 
             customerService.Remove(id);
+
+            return Ok();
+        }
+
+        [HttpHead("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public IActionResult Head(int id)
+        {
+            Customer existingCustomer = customerService.Get(id);
+
+            if (existingCustomer == null)
+                return NotFound();
 
             return Ok();
         }

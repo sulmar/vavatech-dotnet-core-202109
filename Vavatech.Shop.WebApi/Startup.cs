@@ -42,7 +42,11 @@ namespace Vavatech.Shop.WebApi
                 options.ConstraintMap.Add("pesel", typeof(PeselRouteConstraint));
             });
 
-            services.AddControllers();
+
+            // dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+            services.AddControllers()
+                .AddNewtonsoftJson(); // w celu u¿ycia JsonPatch
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Vavatech.Shop.WebApi", Version = "v1" });
