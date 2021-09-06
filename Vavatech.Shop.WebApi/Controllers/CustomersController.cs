@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
+using Vavatech.Shop.Models.SearchCritierias;
 
 namespace Vavatech.Shop.WebApi.Controllers
 {
@@ -20,13 +21,13 @@ namespace Vavatech.Shop.WebApi.Controllers
         }
 
         // GET api/customers - endpoint (adres końcowy)
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var customers = customerService.Get();
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    var customers = customerService.Get();
 
-            return Ok(customers);
-        }
+        //    return Ok(customers);
+        //}
 
         // GET api/customers/{id} - endpoint (adres końcowy)
         [HttpGet("{id:int}")]
@@ -65,6 +66,16 @@ namespace Vavatech.Shop.WebApi.Controllers
 
         //    return Ok(customer);
         //}
+
+
+        // GET api/customers&city=Warszawa&street=Dworcowa
+        [HttpGet]
+        public IActionResult Get([FromQuery] CustomerSearchCriteria searchCriteria)
+        {
+            var customers = customerService.Get(searchCriteria);
+
+            return Ok(customers);
+        }
 
     }
 }
