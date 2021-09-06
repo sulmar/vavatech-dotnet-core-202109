@@ -11,7 +11,7 @@ namespace Vavatech.Shop.WebApi.Controllers
 {
     [Route("api/[controller]")]    // <- prefix
     [Route("api/klienci")]    // <- prefix
-    public class CustomersController : Controller
+    public class CustomersController : ControllerBase
     {
         private readonly ICustomerService customerService;
 
@@ -76,6 +76,16 @@ namespace Vavatech.Shop.WebApi.Controllers
 
             return Ok(customers);
         }
+
+
+        // GET api/orders?customerId=10
+
+        // GET api/customers/10/orders
+
+        // GET api/customers/10/orders/last
+
+        // GET api/customers/10/orders/2020
+        // GET api/customers/10/orders/2020/09
 
     }
 }
