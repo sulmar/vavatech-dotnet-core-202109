@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Validators.Abstractions;
+using Validators.Polish;
 
 namespace Vavatech.Shop.WebApi.RouteConstraints
 {
@@ -14,6 +16,8 @@ namespace Vavatech.Shop.WebApi.RouteConstraints
             {
                 string pesel = peselValue.ToString();
 
+
+                // dotnet add package PolishValidators
                 IValidator validator = new PeselValidator();
 
                 try
