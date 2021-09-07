@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,12 @@ namespace Vavatech.Shop.WebApi.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ICustomerService customerService;
+        private readonly ILogger<CustomersController> logger;
 
-        public CustomersController(ICustomerService customerService)
+        public CustomersController(ICustomerService customerService, ILogger<CustomersController> logger)
         {
             this.customerService = customerService;
+            this.logger = logger;
         }
 
         // GET api/customers - endpoint (adres końcowy)
@@ -86,6 +89,8 @@ namespace Vavatech.Shop.WebApi.Controllers
         public ActionResult<Customer[]> Get([FromQuery] CustomerSearchCriteria searchCriteria)
         {
             var customers = customerService.Get(searchCriteria);
+
+            logger.LogInformation($"Generated {customers.Count()} customers");
 
             return Ok(customers);
         }
