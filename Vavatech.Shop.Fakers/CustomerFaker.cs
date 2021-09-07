@@ -11,6 +11,7 @@ namespace Vavatech.Shop.Fakers
     {
         public CustomerFaker(Faker<Address> addressFaker)
         {
+
             StrictMode(true);
             RuleFor(p => p.Id, f => f.IndexFaker);
             RuleFor(p => p.FirstName, f => f.Person.FirstName);

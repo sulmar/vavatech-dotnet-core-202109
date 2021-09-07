@@ -8,37 +8,14 @@ using Vavatech.Shop.Models.SearchCritierias;
 
 namespace Vavatech.Shop.FakeServices
 {
-    public class FakeCustomerService : ICustomerService
+
+    public class FakeCustomerService : FakeEntityService<Customer>, ICustomerService
     {
-        private readonly ICollection<Customer> customers;
-
-        public FakeCustomerService(Faker<Customer> faker)
+        public FakeCustomerService(Faker<Customer> faker) : base(faker)
         {
-            customers = faker.Generate(100);
         }
 
-        public void Add(Customer customer)
-        {
-            var id = customers.Max(c => c.Id);
-            customer.Id = ++id;
-
-            customers.Add(customer);
-        }
-
-        public IEnumerable<Customer> Get()
-        {
-            return customers;
-        }
-
-        public Customer Get(int id)
-        {
-            return customers.SingleOrDefault(c => c.Id == id);
-        }
-
-        public IEnumerable<Customer> Get(string city, string country, string street)
-        {
-            throw new NotImplementedException();
-        }
+        private ICollection<Customer> customers => entities;
 
         public IEnumerable<Customer> Get(CustomerSearchCriteria searchCriteria)
         {
@@ -65,14 +42,12 @@ namespace Vavatech.Shop.FakeServices
             return customers.SingleOrDefault(c => c.Pesel == pesel);
         }
 
-        public void Remove(int id)
+        public override void Remove(int id)
         {
-            throw new NotImplementedException();
+            Customer customer = Get(id);
+            customer.IsRemoved = true;
         }
 
-        public void Update(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
