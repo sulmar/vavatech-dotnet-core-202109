@@ -41,6 +41,7 @@ namespace Vavatech.Shop.WebApi
 
             // dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
             services.AddControllers()
+                .AddXmlSerializerFormatters()
                 .AddNewtonsoftJson(); // w celu u¿ycia JsonPatch
 
             services.AddSwaggerGen(c =>
@@ -99,6 +100,8 @@ namespace Vavatech.Shop.WebApi
                 {
                     context.Request.Headers.Add("Content-Type", values[0]);
                 }
+
+                await next();
             });
 
             app.UseEndpoints(endpoints =>

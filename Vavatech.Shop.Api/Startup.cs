@@ -67,7 +67,7 @@ namespace Vavatech.Shop.Api
             // app.UseMiddleware<AuthorizationMiddleware>();
 
             app.UseLogger();
-            app.UseMyAuthorization();
+            // app.UseMyAuthorization();
 
             // Customers Middleware
             //app.Use(async (context, next) =>
