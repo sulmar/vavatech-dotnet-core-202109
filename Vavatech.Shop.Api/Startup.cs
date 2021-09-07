@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Vavatech.Shop.Api.Middlewares;
 
 namespace Vavatech.Shop.Api
 {
@@ -17,48 +18,59 @@ namespace Vavatech.Shop.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<AuthorizationMiddleware>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
-          
+
+            #region Middlewares
 
             // Logger Middleware
-            app.Use(async (context, next) =>
-           {
-               logger.LogInformation($"{context.Request.Method} {context.Request.Path}");
+            //app.Use(async (context, next) =>
+            //{
+            //    logger.LogInformation($"{context.Request.Method} {context.Request.Path}");
 
-               await next();
+            //    await next();
 
-               logger.LogInformation($"{context.Response.StatusCode}");
-           });
+            //    logger.LogInformation($"{context.Response.StatusCode}");
+            //});
 
             // Authorization Middleware
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Headers.ContainsKey("Authorization"))
-                {
-                    await next();
-                }
-                else
-                {
-                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                }
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    if (context.Request.Headers.ContainsKey("Authorization"))
+            //    {
+            //        await next();
+            //    }
+            //    else
+            //    {
+            //        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            //    }
+            //});
+
+            #endregion
+
+            // app.UseMiddleware<LoggerMiddleware>();
+            // app.UseMiddleware<AuthorizationMiddleware>();
+
+            app.UseLogger();
+            app.UseMyAuthorization();
+
 
             // Customers Middleware
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path == "api/customers")
-                {
-                    await context.Response.WriteAsync("Hello Customers!");
-                }
-                else
-                {
-                    await next();
-                }
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    if (context.Request.Path == "api/customers")
+            //    {
+            //        await context.Response.WriteAsync("Hello Customers!");
+            //    }
+            //    else
+            //    {
+            //        await next();
+            //    }
+            //});
 
             // Hello Middleware
             app.Run(async context =>

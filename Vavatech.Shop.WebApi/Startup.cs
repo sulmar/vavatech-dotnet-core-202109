@@ -88,6 +88,8 @@ namespace Vavatech.Shop.WebApi
 
             app.UseHttpsRedirection();
 
+            app.UseMvc();
+
             app.UseRouting();
 
             app.UseAuthorization();
