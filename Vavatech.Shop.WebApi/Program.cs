@@ -27,6 +27,7 @@ namespace Vavatech.Shop.WebApi
                    config.AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true);
                    config.AddCommandLine(args);
                    config.AddEnvironmentVariables();
+                   config.AddUserSecrets<Program>();
                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

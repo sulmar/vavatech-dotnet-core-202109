@@ -73,6 +73,12 @@ namespace Vavatech.Shop.WebApi
             nBPApi = Configuration["NBPApi:Url"];
             code = Configuration["NBPApi:Code"];
 
+            // string connectionString = Configuration["ConnectionStrings:ShopConnection"];
+
+            string connectionString = Configuration.GetConnectionString("ShopConnection");
+
+            string googleMapsKey = Configuration["GoogleMapsKey"];
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
