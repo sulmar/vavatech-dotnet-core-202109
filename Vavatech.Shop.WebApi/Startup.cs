@@ -54,6 +54,19 @@ namespace Vavatech.Shop.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            string environmentName = env.EnvironmentName;
+
+            //if (env.EnvironmentName== "Testing")
+            //{
+
+            //}
+
+            if (env.IsEnvironment("Testing"))
+            {
+
+            }
+
+
             string nBPApi = Configuration["NBPApiUrl"];
             string code = Configuration["Code"];
 

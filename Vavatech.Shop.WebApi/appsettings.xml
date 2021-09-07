@@ -1,0 +1,12 @@
+﻿<configuration>
+	
+
+	<FakeOptions>
+		<Count>200</Count>
+	</FakeOptions>
+
+	<NBPApi>
+		<Code>EUR</Code>
+	</NBPApi>
+	
+</configuration>
