@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Primitives;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
@@ -88,11 +89,17 @@ namespace Vavatech.Shop.WebApi
 
             app.UseHttpsRedirection();
 
-            app.UseMvc();
-
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Query.TryGetValue("format", out StringValues values))
+                {
+                    context.Request.Headers.Add("Content-Type", values[0]);
+                }
+            });
 
             app.UseEndpoints(endpoints =>
             {
