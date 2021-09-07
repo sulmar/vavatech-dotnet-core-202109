@@ -5,13 +5,14 @@ using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
 using System.Linq;
 using Vavatech.Shop.Models.SearchCritierias;
+using Microsoft.Extensions.Options;
 
 namespace Vavatech.Shop.FakeServices
 {
 
     public class FakeCustomerService : FakeEntityService<Customer>, ICustomerService
     {
-        public FakeCustomerService(Faker<Customer> faker) : base(faker)
+        public FakeCustomerService(Faker<Customer> faker, IOptions<FakeOptions> options) : base(faker, options)
         {
         }
 

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
+using Vavatech.Shop.FakeServices;
 using Vavatech.Shop.WebApi.RouteConstraints;
 
 namespace Vavatech.Shop.WebApi
@@ -26,6 +27,9 @@ namespace Vavatech.Shop.WebApi
              services.AddFakeServices();
 
             // services.AddDbServices();
+
+            // Rejestracja konfiguracji za pomoc¹ IOptions
+            services.Configure<FakeOptions>(Configuration.GetSection("FakeOptions"));
 
             // rejestracja w³asnej regu³y tras
             services.Configure<RouteOptions>(options =>
@@ -50,6 +54,12 @@ namespace Vavatech.Shop.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            string nBPApi = Configuration["NBPApiUrl"];
+            string code = Configuration["Code"];
+
+            nBPApi = Configuration["NBPApi:Url"];
+            code = Configuration["NBPApi:Code"];
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

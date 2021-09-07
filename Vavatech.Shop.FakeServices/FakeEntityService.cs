@@ -4,17 +4,29 @@ using System.Collections.Generic;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
 using System.Linq;
+using Microsoft.Extensions.Options;
 
 namespace Vavatech.Shop.FakeServices
 {
+
+    public class FakeOptions
+    {
+        public int Count { get; set; }
+    }
+
     public class FakeEntityService<TEntity> : IEntityService<TEntity>
         where TEntity : BaseEntity
     {
         protected readonly ICollection<TEntity> entities;
 
-        public FakeEntityService(Faker<TEntity> faker)
+        private readonly FakeOptions options;
+
+
+        public FakeEntityService(Faker<TEntity> faker, IOptions<FakeOptions> options)
         {
-            this.entities = faker.Generate(100);
+            this.options = options.Value;
+
+            this.entities = faker.Generate(options.Value.Count);
         }
 
         public virtual void Add(TEntity entity)
