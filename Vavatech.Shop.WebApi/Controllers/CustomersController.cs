@@ -90,7 +90,8 @@ namespace Vavatech.Shop.WebApi.Controllers
         {
             var customers = customerService.Get(searchCriteria);
 
-            logger.LogInformation($"Generated {customers.Count()} customers");
+            // logger.LogInformation($"Generated {customers.Count()} customers");
+            logger.LogInformation("Generated {0} customers", customers.Count());
 
             return Ok(customers);
         }
