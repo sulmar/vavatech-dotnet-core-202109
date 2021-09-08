@@ -26,7 +26,11 @@ namespace Vavatech.Shop.SignalRSenderConsoleClient
             HubConnection connection = new HubConnectionBuilder()
                 .WithUrl(url)
                 .AddMessagePackProtocol()
+                .WithAutomaticReconnect()
                 .Build();
+
+            connection.Reconnecting += Connection_Reconnecting;
+            connection.Reconnected += Connection_Reconnected;
 
             Console.WriteLine($"Connecting {url}");
 
@@ -53,6 +57,24 @@ namespace Vavatech.Shop.SignalRSenderConsoleClient
             Console.ReadKey();
 
             Console.ResetColor();
+        }
+
+        private static Task Connection_Reconnected(string arg)
+        {
+            Console.WriteLine("Reconnected.");
+
+            // TODO: send buffered data
+            
+            return Task.CompletedTask;
+        }
+
+        private static Task Connection_Reconnecting(Exception arg)
+        {
+            Console.WriteLine("Reconnecting...");
+
+            // TODO: buffer data
+
+            return Task.CompletedTask;
         }
     }
 }

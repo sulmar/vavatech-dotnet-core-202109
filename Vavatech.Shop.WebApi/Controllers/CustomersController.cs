@@ -184,6 +184,11 @@ namespace Vavatech.Shop.WebApi.Controllers
             return Ok();
         }
 
+        public IActionResult Batch(Customer[] customers)
+        {
+            return Accepted();
+        }
+
 
         // GET api/orders?customerId=10
 

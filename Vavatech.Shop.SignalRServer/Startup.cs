@@ -39,7 +39,7 @@ namespace Vavatech.Shop.SignalRServer
                     await context.Response.WriteAsync("Use signal-R on /signalr/customers");
                 });
 
-                endpoints.MapHub<CustomersHub>("/signalr/customers");
+                endpoints.MapHub<StrongTypedCustomersHub>("/signalr/customers");
             });
         }
     }
