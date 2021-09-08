@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Grpc.Net.Client;
+using Grpc.Core;
 using System;
 using System.Threading.Tasks;
 using Vavatech.Shop.GrpcServer;
@@ -18,6 +19,30 @@ namespace GrpcConsoleClient
 
             var client = new TrackingService.TrackingServiceClient(channel);
 
+            // await SendLocations(client);
+
+            var request = new SubscribeRequest { Speed = 100 };
+
+            var streamingLocations = client.Subscribe(request);
+
+            // add using Grpc.Core
+            await foreach (var location in streamingLocations.ResponseStream.ReadAllAsync())
+            {
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine($"ALERT {location.Speed} {location.Name}");
+            }
+
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+
+            Console.ResetColor();
+
+        }
+
+        private static async Task SendLocations(TrackingService.TrackingServiceClient client)
+        {
             // dotnet add package Bogus
             var locations = new Faker<AddLocationRequest>()
                 .RuleFor(p => p.Name, f => f.Vehicle.Model())
@@ -36,10 +61,6 @@ namespace GrpcConsoleClient
 
                 await Task.Delay(TimeSpan.FromMilliseconds(10));
             }
-
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
-            
         }
     }
 }
