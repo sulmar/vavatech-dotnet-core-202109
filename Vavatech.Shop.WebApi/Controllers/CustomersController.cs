@@ -186,6 +186,8 @@ namespace Vavatech.Shop.WebApi.Controllers
 
         public IActionResult Batch(Customer[] customers)
         {
+            // TODO: create job
+
             return Accepted();
         }
 
