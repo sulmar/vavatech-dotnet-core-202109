@@ -12,4 +12,10 @@ namespace Vavatech.Shop.IServices
         Task YouHaveGotNewCustomer(Customer customer);
         Task Pong(string message);
     }
+
+    public interface ICustomerServer
+    {
+        Task SendCustomer(Customer customer);
+        Task Ping(string message);
+    }
 }

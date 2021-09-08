@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vavatech.Shop.IServices\Vavatech.Shop.IServices.csproj" />
     <ProjectReference Include="..\Vavatech.Shop.Models\Vavatech.Shop.Models.csproj" />
   </ItemGroup>
 

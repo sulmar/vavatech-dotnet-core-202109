@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using Vavatech.Shop.Fakers;
+using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
 
 namespace Vavatech.Shop.SignalRSenderConsoleClient
@@ -46,7 +47,7 @@ namespace Vavatech.Shop.SignalRSenderConsoleClient
             {
                 Console.Write($"Sending customer {customer.FullName}...");
 
-                await connection.SendAsync("SendCustomer", customer);
+                await connection.SendAsync(nameof(ICustomerServer.SendCustomer), customer);
 
                 Console.WriteLine(" Sent.");
 

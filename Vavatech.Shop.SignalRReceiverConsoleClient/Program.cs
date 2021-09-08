@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
+using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
 
 namespace Vavatech.Shop.SignalRReceiverConsoleClient
@@ -26,7 +27,10 @@ namespace Vavatech.Shop.SignalRReceiverConsoleClient
                 .AddMessagePackProtocol()
                 .Build();
 
-            connection.On<Customer>("YouHaveGotNewCustomer", customer => Console.WriteLine($"Received {customer.FullName}"));
+            connection.On<Customer>(nameof(ICustomerClient.YouHaveGotNewCustomer), customer => Console.WriteLine($"Received {customer.FullName}"));
+
+            //HubConnection<ICustomerClient>
+            //connection.OnYouHaveGotNewCustomer(customer => Console.WriteLine(customer));
 
             Console.WriteLine($"Connecting {url}");
 

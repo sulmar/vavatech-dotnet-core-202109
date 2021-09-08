@@ -9,7 +9,7 @@ using Vavatech.Shop.Models;
 
 namespace Vavatech.Shop.SignalRServer.Hubs
 {
-    public class StrongTypedCustomersHub : Hub<ICustomerClient>
+    public class StrongTypedCustomersHub : Hub<ICustomerClient>, ICustomerServer
     {
         private readonly ILogger<CustomersHub> logger;
 
