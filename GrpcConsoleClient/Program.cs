@@ -14,7 +14,7 @@ namespace GrpcConsoleClient
 
             GrpcChannel channel = GrpcChannel.ForAddress(url);
 
-            var client = new Vavatech.Shop.GrpcServer.TrackingService.TrackingServiceClient(channel);
+            var client = new TrackingService.TrackingServiceClient(channel);
 
             
         }

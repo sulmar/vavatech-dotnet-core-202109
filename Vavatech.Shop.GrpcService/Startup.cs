@@ -32,18 +32,7 @@ namespace Vavatech.Shop.GrpcService
             }
 
             // Publish protos
-            var provider = new FileExtensionContentTypeProvider();
-            provider.Mappings.Clear();
-            provider.Mappings[".proto"] = "text/plain";
-
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                RequestPath = "/proto",
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Protos")),
-                ContentTypeProvider = provider
-            });
-
-            // app.UseStaticFilesProtos("Protos");
+            app.UseStaticFilesProtos(Path.Combine(env.ContentRootPath, "Protos"));
 
             app.UseRouting();
 
