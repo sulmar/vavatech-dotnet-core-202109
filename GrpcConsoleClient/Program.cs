@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Grpc.Net.Client;
+using System;
+using Vavatech.Shop.GrpcServer;
 
 namespace GrpcConsoleClient
 {
@@ -6,7 +8,15 @@ namespace GrpcConsoleClient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello gRPC Client!");
+
+            const string url = "https://localhost:5001";
+
+            GrpcChannel channel = GrpcChannel.ForAddress(url);
+
+            var client = new Vavatech.Shop.GrpcServer.TrackingService.TrackingServiceClient(channel);
+
+            
         }
     }
 }

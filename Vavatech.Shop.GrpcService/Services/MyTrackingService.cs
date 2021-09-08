@@ -1,14 +1,12 @@
 ﻿using Grpc.Core;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Vavatech.Shop.GrpcServer;
 
 namespace Vavatech.Shop.GrpcService.Services
 {
                                     // {csharp_namespace}.{service}.{service}Base
-    public class MyTrackingService : Vavatech.Shop.GrpcService.TrackingService.TrackingServiceBase
+    public class MyTrackingService : Vavatech.Shop.GrpcServer.TrackingService.TrackingServiceBase
     {
         private readonly ILogger<MyTrackingService> logger;
 
