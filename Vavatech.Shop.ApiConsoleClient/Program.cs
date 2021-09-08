@@ -16,6 +16,8 @@ namespace Vavatech.Shop.ApiConsoleClient
 
             Customer customer = await GetCustomer(customerId);
 
+            Console.WriteLine(customer.FullName);
+
         }
 
         private static async Task<Customer> GetCustomer(int customerId)
