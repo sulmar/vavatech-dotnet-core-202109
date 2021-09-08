@@ -1,0 +1,13 @@
+﻿@page "/Customers/{id:int}"
+@model Vavatech.Shop.RazorPagesWebApp.Pages.Customers.EditModel
+@{
+}
+
+
+<form method="post">
+    <input type="hidden" asp-for="Customer.Id" />
+    <input type="text" asp-for="Customer.FirstName" />
+    <input type="text" asp-for="Customer.LastName" />
+
+    <button type="submit" class="btn btn-success">Save</button>
+</form>

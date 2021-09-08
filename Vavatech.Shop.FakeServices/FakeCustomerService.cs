@@ -43,6 +43,14 @@ namespace Vavatech.Shop.FakeServices
             return customers.SingleOrDefault(c => c.Pesel == pesel);
         }
 
+        public override void Update(Customer entity)
+        {
+            Customer customer = Get(entity.Id);
+
+            customer.FirstName = entity.FirstName;
+            customer.LastName = entity.LastName;
+        }
+
         public override void Remove(int id)
         {
             Customer customer = Get(id);

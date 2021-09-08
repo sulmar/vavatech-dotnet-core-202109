@@ -1,3 +1,4 @@
+using Bogus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Vavatech.Shop.Fakers;
+using Vavatech.Shop.FakeServices;
+using Vavatech.Shop.IServices;
+using Vavatech.Shop.Models;
 
 namespace Vavatech.Shop.RazorPagesWebApp
 {
@@ -23,6 +28,12 @@ namespace Vavatech.Shop.RazorPagesWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ICustomerService, FakeCustomerService>();
+            services.AddSingleton<Faker<Customer>, CustomerFaker>();
+            services.AddSingleton<Faker<Address>, AddressFaker>();
+
+            services.Configure<FakeOptions>(options => options.Count = 20);
+
             services.AddRazorPages();
         }
 
