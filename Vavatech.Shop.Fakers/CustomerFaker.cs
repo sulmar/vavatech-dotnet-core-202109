@@ -2,6 +2,7 @@
 using System;
 using Vavatech.Shop.Models;
 using Bogus.Extensions.Poland;
+using Microsoft.AspNetCore.Identity;
 
 namespace Vavatech.Shop.Fakers
 {
@@ -9,7 +10,7 @@ namespace Vavatech.Shop.Fakers
     // dotnet add package Sulmar.Bogus.Extensions.Poland
     public class CustomerFaker : Faker<Customer>
     {
-        public CustomerFaker(Faker<Address> addressFaker)
+        public CustomerFaker(Faker<Address> addressFaker, IPasswordHasher<Customer> passwordHasher)
         {
             UseSeed(1);
             StrictMode(true);
@@ -27,7 +28,7 @@ namespace Vavatech.Shop.Fakers
             RuleFor(p => p.CreatedOn, f => f.Date.Past(2));
 
             RuleFor(p => p.Username, f => f.Person.UserName);
-            RuleFor(p => p.Password, f => "12345");
+            RuleFor(p => p.HashedPassword, (f, customer) => passwordHasher.HashPassword(customer, "12345"));
 
             // firstname.lastname@domain.com
             RuleFor(p => p.Email, (f, customer) => $"{customer.FirstName}.{customer.LastName}@domain.com");

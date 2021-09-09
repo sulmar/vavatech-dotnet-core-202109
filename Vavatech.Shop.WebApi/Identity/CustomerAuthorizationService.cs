@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,17 +11,20 @@ namespace Vavatech.Shop.WebApi.Identity
     public class CustomerAuthorizationService : IAuthorizationService
     {
         private readonly ICustomerService customerService;
+        private readonly IPasswordHasher<Customer> passwordHasher;
 
-        public CustomerAuthorizationService(ICustomerService customerService)
+        public CustomerAuthorizationService(ICustomerService customerService, IPasswordHasher<Customer> passwordHasher)
         {
             this.customerService = customerService;
+            this.passwordHasher = passwordHasher;
         }
 
         public bool TryAuthenticate(string username, string password, out Customer customer)
         {
             customer = customerService.Get(username);
 
-            return customer!=null && customer.Password == password;
+            return customer != null 
+                && passwordHasher.VerifyHashedPassword(customer, customer.HashedPassword, password) == PasswordVerificationResult.Success;
         }
     }
 }

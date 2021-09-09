@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ using System;
 using System.IO;
 using Vavatech.Shop.FakeServices;
 using Vavatech.Shop.IServices;
+using Vavatech.Shop.Models;
 using Vavatech.Shop.WebApi.Identity;
 using Vavatech.Shop.WebApi.RouteConstraints;
 
@@ -57,13 +59,13 @@ namespace Vavatech.Shop.WebApi
                 c.IncludeXmlComments(filePath);
             });
 
-            
-
             services.AddAuthentication("Basic")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Basic", null);
 
 
             services.AddScoped<IClaimsTransformation, CustomerClaimsTransformation>();
+
+            services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
