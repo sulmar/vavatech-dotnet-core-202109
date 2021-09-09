@@ -176,15 +176,23 @@ namespace Vavatech.Shop.WebApi.Controllers
         }
 
 
-        [Authorize(Policy = "IsWomanAdult")]
+       // [Authorize(Policy = "IsWomanAdult")]
         
         // DELETE api/customers/{id}
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete([FromServices] IAuthorizationService authorizationService, int id)
         {
+            var result = await authorizationService.AuthorizeAsync(this.User, "IsWomanAdult");
+
+            if (result.Succeeded)
+            {
+
+            }
+           
+
             Customer existingCustomer = customerService.Get(id);
 
             if (existingCustomer == null)

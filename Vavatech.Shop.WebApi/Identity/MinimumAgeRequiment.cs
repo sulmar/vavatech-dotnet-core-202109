@@ -28,43 +28,6 @@ namespace Vavatech.Shop.WebApi.Identity
         }
     }
 
-    public class GenderRequirement : IAuthorizationRequirement // mark interface
-    {
-        public Gender Gender { get;  }
-
-        public GenderRequirement(Gender gender)
-        {
-            this.Gender = gender;
-        }
-    }
-
-    public class GenderHandler : AuthorizationHandler<GenderRequirement>
-    {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, GenderRequirement requirement)
-        {
-            //if (!context.User.HasClaim(c => c.Type == ClaimTypes.Gender))
-            //{
-            //    context.Fail();
-
-            //    return Task.CompletedTask;
-            //}
-
-
-            Gender gender = (Gender) Enum.Parse(typeof(Gender), context.User.FindFirst(ClaimTypes.Gender).Value);
-
-            if (gender == requirement.Gender)
-            {
-                context.Succeed(requirement);
-            }
-            else
-            {
-                context.Fail();
-            }
-
-            return Task.CompletedTask;
-        }
-    }
-
     // Note: register services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>(); !
     public class MinimumAgeHandler : AuthorizationHandler<MinimumAgeRequirement>
     {

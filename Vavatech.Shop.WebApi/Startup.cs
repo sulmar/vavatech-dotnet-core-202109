@@ -84,6 +84,9 @@ namespace Vavatech.Shop.WebApi
                     policy.Requirements.Add(new GenderRequirement(Gender.Male));
                     policy.Requirements.Add(new MinimumAgeRequirement(21));
                 });
+
+                options.AddPolicy("TheSameAuthor", 
+                    policy => policy.Requirements.Add(new TheSameAuthorRequriment()));
             });
 
 
