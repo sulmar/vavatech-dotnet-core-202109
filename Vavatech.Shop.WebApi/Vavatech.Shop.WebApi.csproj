@@ -38,6 +38,7 @@
     <ProjectReference Include="..\Vavatech.Shop.FakeServices\Vavatech.Shop.FakeServices.csproj" />
     <ProjectReference Include="..\Vavatech.Shop.IServices\Vavatech.Shop.IServices.csproj" />
     <ProjectReference Include="..\Vavatech.Shop.Models\Vavatech.Shop.Models.csproj" />
+    <ProjectReference Include="..\Vavatech.Shop.Shared\Vavatech.Shop.Shared.csproj" />
   </ItemGroup>
 
 </Project>

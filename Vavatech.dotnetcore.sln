@@ -39,6 +39,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.WorkerService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.WindowsService", "Vavatech.Shop.WindowsService\Vavatech.Shop.WindowsService.csproj", "{69E1F512-B115-4713-ADE2-EB9F1BC169D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.Shared", "Vavatech.Shop.Shared\Vavatech.Shop.Shared.csproj", "{282DDBA2-9C5B-413D-802C-9753411859AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.WpfClient", "Vavatech.Shop.WpfClient\Vavatech.Shop.WpfClient.csproj", "{CD9AD9AC-99FB-4EE0-9308-231FE26E0165}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.LegacyService", "Vavatech.Shop.LegacyService\Vavatech.Shop.LegacyService.csproj", "{9AD224A0-43D9-42F7-B8E4-CE9C83D4B58B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.Wpf5Client", "Vavatech.Shop.Wpf5Client\Vavatech.Shop.Wpf5Client.csproj", "{ED3BFC6C-021F-4426-B21E-DFAE2F83B47A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.Wpf3Client", "Vavatech.Shop.Wpf3Client\Vavatech.Shop.Wpf3Client.csproj", "{7DC787B3-8A9D-4C54-8535-0AB2595D5D80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +127,26 @@ Global
 		{69E1F512-B115-4713-ADE2-EB9F1BC169D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69E1F512-B115-4713-ADE2-EB9F1BC169D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69E1F512-B115-4713-ADE2-EB9F1BC169D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{282DDBA2-9C5B-413D-802C-9753411859AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{282DDBA2-9C5B-413D-802C-9753411859AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{282DDBA2-9C5B-413D-802C-9753411859AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{282DDBA2-9C5B-413D-802C-9753411859AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD9AD9AC-99FB-4EE0-9308-231FE26E0165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD9AD9AC-99FB-4EE0-9308-231FE26E0165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD9AD9AC-99FB-4EE0-9308-231FE26E0165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD9AD9AC-99FB-4EE0-9308-231FE26E0165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AD224A0-43D9-42F7-B8E4-CE9C83D4B58B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD224A0-43D9-42F7-B8E4-CE9C83D4B58B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD224A0-43D9-42F7-B8E4-CE9C83D4B58B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD224A0-43D9-42F7-B8E4-CE9C83D4B58B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED3BFC6C-021F-4426-B21E-DFAE2F83B47A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED3BFC6C-021F-4426-B21E-DFAE2F83B47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED3BFC6C-021F-4426-B21E-DFAE2F83B47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED3BFC6C-021F-4426-B21E-DFAE2F83B47A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DC787B3-8A9D-4C54-8535-0AB2595D5D80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DC787B3-8A9D-4C54-8535-0AB2595D5D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DC787B3-8A9D-4C54-8535-0AB2595D5D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DC787B3-8A9D-4C54-8535-0AB2595D5D80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
