@@ -12,6 +12,8 @@ namespace Vavatech.Shop.IServices
 
         IEnumerable<Customer> Get(CustomerSearchCriteria searchCriteria);
 
+        Customer Get(string username);
+
     }
 
     

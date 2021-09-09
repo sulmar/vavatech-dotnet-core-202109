@@ -57,6 +57,9 @@ namespace Vavatech.Shop.FakeServices
             customer.IsRemoved = true;
         }
 
-
+        public Customer Get(string username)
+        {
+            return customers.SingleOrDefault(c => c.Username == username);
+        }
     }
 }

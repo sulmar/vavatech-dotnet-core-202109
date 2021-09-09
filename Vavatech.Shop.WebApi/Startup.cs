@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
@@ -9,6 +10,8 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using Vavatech.Shop.FakeServices;
+using Vavatech.Shop.IServices;
+using Vavatech.Shop.WebApi.Identity;
 using Vavatech.Shop.WebApi.RouteConstraints;
 
 namespace Vavatech.Shop.WebApi
@@ -26,6 +29,8 @@ namespace Vavatech.Shop.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
              services.AddFakeServices();
+
+            services.AddSingleton<IAuthorizationService, CustomerAuthorizationService>();
 
             // services.AddDbServices();
 
@@ -51,6 +56,11 @@ namespace Vavatech.Shop.WebApi
                 var filePath = Path.Combine(AppContext.BaseDirectory, "Vavatech.Shop.WebApi.xml");
                 c.IncludeXmlComments(filePath);
             });
+
+            
+
+            services.AddAuthentication("Basic")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Basic", null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,6 +102,7 @@ namespace Vavatech.Shop.WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.Use(async (context, next) =>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -85,6 +86,8 @@ namespace Vavatech.Shop.WebApi.Controllers
 
 
         // GET api/customers&city=Warszawa&street=Dworcowa
+
+        [Authorize]
         [HttpGet]
         public ActionResult<Customer[]> Get([FromQuery] CustomerSearchCriteria searchCriteria)
         {
