@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shop.MVCWebApplica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.RazorPagesWebApp", "Vavatech.Shop.RazorPagesWebApp\Vavatech.Shop.RazorPagesWebApp.csproj", "{46761F69-8421-4659-8E58-D75E3F03DD9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.TcpServer", "Vavatech.Shop.TcpServer\Vavatech.Shop.TcpServer.csproj", "{600269E0-F0D1-40D4-808C-C4D50AB081D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{46761F69-8421-4659-8E58-D75E3F03DD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46761F69-8421-4659-8E58-D75E3F03DD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46761F69-8421-4659-8E58-D75E3F03DD9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{600269E0-F0D1-40D4-808C-C4D50AB081D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{600269E0-F0D1-40D4-808C-C4D50AB081D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{600269E0-F0D1-40D4-808C-C4D50AB081D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{600269E0-F0D1-40D4-808C-C4D50AB081D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
