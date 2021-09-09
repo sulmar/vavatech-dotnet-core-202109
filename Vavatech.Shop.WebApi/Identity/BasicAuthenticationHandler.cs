@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -53,10 +55,12 @@ namespace Vavatech.Shop.WebApi.Identity
                 return AuthenticateResult.Fail("Invalid username or password");
             }
 
+            IIdentity identity = new ClaimsIdentity(Scheme.Name);
+            ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
+            var ticket = new AuthenticationTicket(principal, Scheme.Name);
 
-
-            throw new NotImplementedException();
+            return AuthenticateResult.Success(ticket);
 
 
         }

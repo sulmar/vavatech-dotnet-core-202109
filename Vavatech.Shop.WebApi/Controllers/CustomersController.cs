@@ -88,9 +88,16 @@ namespace Vavatech.Shop.WebApi.Controllers
         // GET api/customers&city=Warszawa&street=Dworcowa
 
         [Authorize]
+
         [HttpGet]
         public ActionResult<Customer[]> Get([FromQuery] CustomerSearchCriteria searchCriteria)
         {
+
+            //if (!this.User.Identity.IsAuthenticated)
+            //{
+            //    return Unauthorized();
+            //}
+
             var customers = customerService.Get(searchCriteria);
 
             // logger.LogInformation($"Generated {customers.Count()} customers");
