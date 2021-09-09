@@ -28,6 +28,9 @@ namespace Vavatech.Shop.Fakers
 
             RuleFor(p => p.Username, f => f.Person.UserName);
             RuleFor(p => p.Password, f => "12345");
+
+            // firstname.lastname@domain.com
+            RuleFor(p => p.Email, (f, customer) => $"{customer.FirstName}.{customer.LastName}@domain.com");
             
         }
     }

@@ -13,6 +13,7 @@ namespace Vavatech.Shop.Models
         public Gender Gender { get; set; }
         public Address ShipAddress { get; set; }
         public bool IsRemoved { get; set; }
+        public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
     }

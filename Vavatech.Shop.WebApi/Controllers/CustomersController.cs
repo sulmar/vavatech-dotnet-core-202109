@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
@@ -13,6 +14,7 @@ using Vavatech.Shop.Models.SearchCritierias;
 
 namespace Vavatech.Shop.WebApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]    // <- prefix
     // [Route("api/klienci")]    // <- prefix
@@ -87,8 +89,7 @@ namespace Vavatech.Shop.WebApi.Controllers
 
         // GET api/customers&city=Warszawa&street=Dworcowa
 
-        [Authorize]
-
+        [Authorize(Roles = "Developer,Trainer")]
         [HttpGet]
         public ActionResult<Customer[]> Get([FromQuery] CustomerSearchCriteria searchCriteria)
         {
@@ -97,6 +98,18 @@ namespace Vavatech.Shop.WebApi.Controllers
             //{
             //    return Unauthorized();
             //}
+
+            if (this.User.IsInRole("Trainer"))
+            {
+
+            }
+
+            if (this.User.HasClaim(c=>c.Type=="kat" && c.Value =="A"))
+            {
+
+            }
+
+            string email = this.User.FindFirst(c => c.Type == ClaimTypes.Email)?.Value;
 
             var customers = customerService.Get(searchCriteria);
 
@@ -180,6 +193,7 @@ namespace Vavatech.Shop.WebApi.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpHead("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -61,6 +61,9 @@ namespace Vavatech.Shop.WebApi
 
             services.AddAuthentication("Basic")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Basic", null);
+
+
+            services.AddScoped<IClaimsTransformation, CustomerClaimsTransformation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
