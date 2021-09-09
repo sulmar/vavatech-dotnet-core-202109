@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vavatech.Shop.TcpServer
 {
+
     public class LoggerBackgroundService : BackgroundService
     {
         private readonly ILogger<LoggerBackgroundService> logger;
