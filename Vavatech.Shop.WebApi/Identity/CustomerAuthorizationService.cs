@@ -8,7 +8,7 @@ using Vavatech.Shop.Models;
 
 namespace Vavatech.Shop.WebApi.Identity
 {
-    public class CustomerAuthorizationService : IAuthorizationService
+    public class CustomerAuthorizationService : ICustomerAuthorizationService
     {
         private readonly ICustomerService customerService;
         private readonly IPasswordHasher<Customer> passwordHasher;

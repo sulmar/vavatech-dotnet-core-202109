@@ -176,6 +176,8 @@ namespace Vavatech.Shop.WebApi.Controllers
         }
 
 
+        [Authorize(Policy = "IsWomanAdult")]
+        
         // DELETE api/customers/{id}
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

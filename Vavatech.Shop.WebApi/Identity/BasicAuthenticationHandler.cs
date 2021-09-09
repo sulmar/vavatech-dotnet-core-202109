@@ -18,10 +18,10 @@ namespace Vavatech.Shop.WebApi.Identity
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
         private const string authorizationKey = "Authorization";
-        private readonly IAuthorizationService authorizationService;
+        private readonly ICustomerAuthorizationService authorizationService;
 
         public BasicAuthenticationHandler(
-            IAuthorizationService authorizationService,
+            ICustomerAuthorizationService authorizationService,
             IOptionsMonitor<AuthenticationSchemeOptions> options, 
             ILoggerFactory logger, 
             UrlEncoder encoder, 

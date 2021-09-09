@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
+using System.Security.Claims;
 using Vavatech.Shop.FakeServices;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
@@ -32,7 +34,7 @@ namespace Vavatech.Shop.WebApi
         {
              services.AddFakeServices();
 
-            services.AddSingleton<IAuthorizationService, CustomerAuthorizationService>();
+            services.AddSingleton<ICustomerAuthorizationService, CustomerAuthorizationService>();
 
             // services.AddDbServices();
 
@@ -61,6 +63,28 @@ namespace Vavatech.Shop.WebApi
 
             services.AddAuthentication("Basic")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Basic", null);
+
+            services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+            services.AddSingleton<IAuthorizationHandler, GenderHandler>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsWomanAdult", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim(ClaimTypes.Gender);
+                    // policy.Requirements.Add(new GenderRequirement(Gender.Female));
+                    policy.RequireGender(Gender.Female);
+                    policy.Requirements.Add(new MinimumAgeRequirement(18));
+                });
+
+                options.AddPolicy("IsManAdult", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Gender);
+                    policy.Requirements.Add(new GenderRequirement(Gender.Male));
+                    policy.Requirements.Add(new MinimumAgeRequirement(21));
+                });
+            });
 
 
             services.AddScoped<IClaimsTransformation, CustomerClaimsTransformation>();

@@ -7,7 +7,7 @@ using Vavatech.Shop.Models;
 
 namespace Vavatech.Shop.IServices
 {
-    public interface IAuthorizationService
+    public interface ICustomerAuthorizationService
     {
         bool TryAuthenticate(string username, string password, out Customer customer);
     }

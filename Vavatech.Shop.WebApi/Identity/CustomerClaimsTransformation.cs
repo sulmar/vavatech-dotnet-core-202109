@@ -31,6 +31,8 @@ namespace Vavatech.Shop.WebApi.Identity
             identity.AddClaim(new Claim("kat", "A"));
             identity.AddClaim(new Claim("kat", "B"));
             identity.AddClaim(new Claim(ClaimTypes.Email, customer.Email));
+            identity.AddClaim(new Claim(ClaimTypes.DateOfBirth, customer.DateOfBirth.ToString()));
+            identity.AddClaim(new Claim(ClaimTypes.Gender, customer.Gender.ToString()));
 
             identity.AddClaim(new Claim(ClaimTypes.Role, "Trainer"));
 
