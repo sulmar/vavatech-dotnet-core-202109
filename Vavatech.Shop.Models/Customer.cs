@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Vavatech.Shop.Models
 {
+
+    // POCO (Plan Old CLR Object)
     public class Customer : BaseEntity
     {
         public string FirstName { get; set; }

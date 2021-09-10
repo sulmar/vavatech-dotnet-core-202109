@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Vavatech.Shop.EFDbServices;
 using Vavatech.Shop.Fakers;
 using Vavatech.Shop.FakeServices;
 using Vavatech.Shop.IServices;
@@ -13,6 +14,15 @@ namespace Vavatech.Shop.WebApi
 {
     public static class ServiceCollectionExtensions
     {
+        public static IServiceCollection AddDbServices(this IServiceCollection services)
+        {
+            services.AddScoped<ICustomerService, DbCustomerService>();
+            services.AddSingleton<Faker<Customer>, CustomerFaker>();
+            services.AddSingleton<Faker<Address>, AddressFaker>();
+
+            return services;
+        }
+
         public static IServiceCollection AddFakeServices(this IServiceCollection services)
         {
             services.AddFakeCustomerServices();
