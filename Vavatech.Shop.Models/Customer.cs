@@ -24,6 +24,7 @@ namespace Vavatech.Shop.Models
         public string Email { get; set; }
         public string Username { get; set; }
         public string HashedPassword { get; set; }
+        public decimal Credit { get; set; }
     }
 
     public class Address

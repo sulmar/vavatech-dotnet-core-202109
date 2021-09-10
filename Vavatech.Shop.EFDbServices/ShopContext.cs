@@ -16,7 +16,9 @@ namespace Vavatech.Shop.EFDbServices
     {
         public ShopContext(DbContextOptions options) : base(options)
         {
-            this.Database.EnsureCreated();
+            // this.Database.EnsureCreated();
+
+            this.Database.Migrate();
         }
 
         public DbSet<Customer> Customers { get; set; }

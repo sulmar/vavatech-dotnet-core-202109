@@ -96,10 +96,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vavatech.Shop.Models\Vavatech.Shop.Models.csproj">
-      <Project>{4e777759-2eca-4273-831f-df1201540bb3}</Project>
-      <Name>Vavatech.Shop.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Vavatech.Shop.Shared\Vavatech.Shop.Shared.csproj">
       <Project>{282ddba2-9c5b-413d-802c-9753411859aa}</Project>
       <Name>Vavatech.Shop.Shared</Name>

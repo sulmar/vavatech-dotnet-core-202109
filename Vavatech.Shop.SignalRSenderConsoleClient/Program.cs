@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -39,7 +40,7 @@ namespace Vavatech.Shop.SignalRSenderConsoleClient
 
             Console.WriteLine($"Connected {connection.ConnectionId}");
 
-            Faker<Customer> faker = new CustomerFaker(new AddressFaker());
+            Faker<Customer> faker = new CustomerFaker(new AddressFaker(), new PasswordHasher<Customer>());
 
             var customers = faker.GenerateForever();
 
