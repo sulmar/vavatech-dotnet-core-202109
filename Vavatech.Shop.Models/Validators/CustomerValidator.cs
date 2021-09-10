@@ -16,7 +16,7 @@ namespace Vavatech.Shop.Models.Validators
 
         public CustomerValidator()
         {
-            RuleFor(p => p.LastName).NotEmpty().Length(2, 50);
+            RuleFor(p => p.LastName).NotEmpty().Length(2, 50).WithName("Nazwisko");
             RuleFor(p => p.Pesel).Length(11).Must(NotExists);
             RuleFor(p => p.Email).EmailAddress();
         }
