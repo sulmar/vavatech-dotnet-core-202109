@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.Wpf5Client", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.Wpf3Client", "Vavatech.Shop.Wpf3Client\Vavatech.Shop.Wpf3Client.csproj", "{7DC787B3-8A9D-4C54-8535-0AB2595D5D80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shop.EFDbServices", "Vavatech.Shop.EFDbServices\Vavatech.Shop.EFDbServices.csproj", "{59945BB0-B772-47AE-83A5-10765F008C31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,10 @@ Global
 		{7DC787B3-8A9D-4C54-8535-0AB2595D5D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DC787B3-8A9D-4C54-8535-0AB2595D5D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DC787B3-8A9D-4C54-8535-0AB2595D5D80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59945BB0-B772-47AE-83A5-10765F008C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59945BB0-B772-47AE-83A5-10765F008C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59945BB0-B772-47AE-83A5-10765F008C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59945BB0-B772-47AE-83A5-10765F008C31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,6 +16,7 @@ using System;
 using System.IO;
 using System.Security.Claims;
 using Validators.Abstractions;
+using Vavatech.Shop.EFDbServices;
 using Vavatech.Shop.FakeServices;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
@@ -103,7 +105,13 @@ namespace Vavatech.Shop.WebApi
 
             services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
 
-     
+            // string connectionString = Configuration["ConnectionStrings:ShopConnection"];
+
+            string connectionString = Configuration.GetConnectionString("ShopConnection");
+
+            // dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+            services.AddDbContext<ShopContext>(options => options.UseSqlServer(connectionString));
+
             // services.AddTransient<IValidator<Customer>, CustomerValidator>();
 
         }
