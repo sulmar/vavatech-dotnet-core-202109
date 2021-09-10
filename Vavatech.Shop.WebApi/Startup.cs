@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -43,6 +44,13 @@ namespace Vavatech.Shop.WebApi
             services.AddDbServices();
 
             services.AddSingleton<ICustomerAuthorizationService, CustomerAuthorizationService>();
+
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+                options.Providers.Add<GzipCompressionProvider>();
+                options.Providers.Add<BrotliCompressionProvider>();
+            });
 
             // services.AddDbServices();
 
@@ -157,6 +165,8 @@ namespace Vavatech.Shop.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseResponseCompression();
 
             app.UseAuthentication();
             app.UseAuthorization();
