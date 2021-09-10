@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -12,9 +14,11 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Security.Claims;
+using Validators.Abstractions;
 using Vavatech.Shop.FakeServices;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
+using Vavatech.Shop.Models.Validators;
 using Vavatech.Shop.WebApi.Identity;
 using Vavatech.Shop.WebApi.RouteConstraints;
 
@@ -48,10 +52,15 @@ namespace Vavatech.Shop.WebApi
             });
 
 
-            // dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+            
             services.AddControllers()
                 .AddXmlSerializerFormatters()
-                .AddNewtonsoftJson(); // w celu u¿ycia JsonPatch
+                .AddNewtonsoftJson()   // dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJsonw celu u¿ycia JsonPatch
+                .AddFluentValidation(
+                    options => options.RegisterValidatorsFromAssemblyContaining<CustomerValidator>()
+                ) // dotnet add package FluentValidation.AspNetCore
+                ; 
+
 
             services.AddSwaggerGen(c =>
             {
@@ -93,6 +102,10 @@ namespace Vavatech.Shop.WebApi
             services.AddScoped<IClaimsTransformation, CustomerClaimsTransformation>();
 
             services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
+
+     
+            // services.AddTransient<IValidator<Customer>, CustomerValidator>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
