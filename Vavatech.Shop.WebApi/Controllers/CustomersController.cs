@@ -15,7 +15,7 @@ using Vavatech.Shop.Models.SearchCritierias;
 namespace Vavatech.Shop.WebApi.Controllers
 {
     [Authorize]
-    [ApiController]
+    // [ApiController]
     [Route("api/[controller]")]    // <- prefix
     // [Route("api/klienci")]    // <- prefix
     public class CustomersController : ControllerBase
@@ -125,6 +125,12 @@ namespace Vavatech.Shop.WebApi.Controllers
         [ProducesDefaultResponseType]
         public IActionResult Post([FromBody] Customer customer)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
             customerService.Add(customer);
 
             // return Created($"http://localhost:5000/api/customers/{customer.Id}", customer);
