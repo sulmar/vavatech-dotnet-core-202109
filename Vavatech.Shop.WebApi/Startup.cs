@@ -112,8 +112,8 @@ namespace Vavatech.Shop.WebApi
             string connectionString = Configuration.GetConnectionString("ShopConnection");
 
             // dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-            // services.AddDbContext<ShopContext>(options => options.UseSqlServer(connectionString));
-            services.AddPooledDbContextFactory<ShopContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<ShopContext>(options => options.UseSqlServer(connectionString));
+//            services.AddPooledDbContextFactory<ShopContext>(options => options.UseSqlServer(connectionString));
 
             // services.AddTransient<IValidator<Customer>, CustomerValidator>();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vavatech.Shop.IServices;
@@ -11,15 +12,30 @@ namespace Vavatech.Shop.EFDbServices
     {
         private readonly ShopContext context;
 
-        public DbCustomerService(ShopContext context)
+        private readonly ILogger<DbCustomerService> logger;
+
+        public DbCustomerService(ShopContext context, ILogger<DbCustomerService> logger)
         {
             this.context = context;
+            this.logger = logger;
         }
 
         public void Add(Customer entity)
         {
+
+            logger.LogInformation("{0}", context.Entry(entity).State.ToString());
+
             context.Customers.Add(entity);
+
+            logger.LogInformation("{0}", context.Entry(entity).State.ToString());
+
             context.SaveChanges();
+
+            logger.LogInformation("{0}", context.Entry(entity).State.ToString());
+
+            entity.IsRemoved = !entity.IsRemoved;
+
+            logger.LogInformation("{0}", context.Entry(entity).State.ToString());
         }
 
         public IEnumerable<Customer> Get(CustomerSearchCriteria searchCriteria)
@@ -63,8 +79,14 @@ namespace Vavatech.Shop.EFDbServices
 
         public void Remove(int id)
         {
-            Customer customer = Get(id);
+            //Customer customer = Get(id);
+
+            Customer customer = new Customer { Id = id };
+
+            // context.Entry(customer).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+
             context.Customers.Remove(customer);
+
             context.SaveChanges();
         }
 
