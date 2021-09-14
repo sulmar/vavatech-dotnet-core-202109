@@ -20,11 +20,9 @@ namespace Vavatech.Shop.WebApi.Identity
 
         public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
-            ClaimsPrincipal claimsPrincipal = principal.Clone();
+            ClaimsIdentity identity = (ClaimsIdentity)principal.Identity;
 
-            ClaimsIdentity identity = (ClaimsIdentity)claimsPrincipal.Identity;
-
-            string username = identity.FindFirst(ClaimTypes.Name).Value;
+            string username = identity.Name;
 
             Customer customer = customerService.Get(username);
 
@@ -36,7 +34,7 @@ namespace Vavatech.Shop.WebApi.Identity
 
             identity.AddClaim(new Claim(ClaimTypes.Role, "Trainer"));
 
-            return Task.FromResult(claimsPrincipal);
+            return Task.FromResult(principal);
         }
     }
 }
